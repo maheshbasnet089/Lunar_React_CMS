@@ -1,9 +1,10 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 function Single(){
     const data = useParams()
+    const navigate = useNavigate()
     const [blog,setBlog] = useState({})
     const fetchBlog = async ()=>{
        const response = await axios.get("https://67512d3169dc1669ec1d4e68.mockapi.io/blogs/" + data.id)
@@ -12,6 +13,11 @@ function Single(){
     useEffect(()=>{
         fetchBlog()
     },[])
+    const deleteBlog =  async()=>{
+        // api --> axios.delete garnu parxa 
+        const response = await axios.delete("https://67512d3169dc1669ec1d4e68.mockapi.io/blogs/" + data.id)
+        navigate("/") 
+    }
 return (
     <div className="bg-gray-100 dark:bg-gray-800 py-8">
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,7 +28,7 @@ return (
                 </div>
                 <div className="flex -mx-2 mb-4">
                     <div className="w-1/2 px-2">
-                        <button className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">Add to Cart</button>
+                        <button onClick={deleteBlog} className="w-full bg-gray-900 dark:bg-gray-600 text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800 dark:hover:bg-gray-700">Delete Me</button>
                     </div>
                     <div className="w-1/2 px-2">
                         <button className="w-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white py-2 px-4 rounded-full font-bold hover:bg-gray-300 dark:hover:bg-gray-600">Add to Wishlist</button>
