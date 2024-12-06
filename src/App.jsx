@@ -5,6 +5,7 @@ import './App.css'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import LearningTailwind from './LearningTailwind'
 import Home from './pages/Home'
+import Single from './pages/Single'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,6 +14,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/blog/:id" element={<Single />} />
     </Routes>
     </BrowserRouter>
   )
