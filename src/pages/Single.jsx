@@ -1,17 +1,17 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
+import { fetchSingleBlog } from "../store/blogSlice"
 
 function Single(){
+    const dispatch = useDispatch()
     const data = useParams()
     const navigate = useNavigate()
-    const [blog,setBlog] = useState({})
-    const fetchBlog = async ()=>{
-       const response = await axios.get("https://67512d3169dc1669ec1d4e68.mockapi.io/blogs/" + data.id)
-        setBlog(response.data)
-    }
+    const {singleBlog:blog}= useSelector((store)=>store.blog)
+    console.log(singleBlog)
     useEffect(()=>{
-        fetchBlog()
+        dispatch(fetchSingleBlog(data.id))
     },[])
     const deleteBlog =  async()=>{
         // api --> axios.delete garnu parxa 
